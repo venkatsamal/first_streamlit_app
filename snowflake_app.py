@@ -15,12 +15,13 @@ def get_fruityvise_data(this_fruit_choice):
   return fruityvice_normalized
   
 streamlit.header("Fruityvice Fruit choice")
-try:
-fruit_choice = streamlit.text_input('What fruit')
-if not fruit_choice:
-  streamlit.error("Please enter fruit")
-else:
-  back_from_function = get_fruityvice_data(fruit_choice)
-  streamlit.dataframe(back_from_function)
-  streamlit.write('user entered', fruit_choice) 
+def get_fruit_list():
+  with my_cnx.cursor() as my_cur:
+       my_cur.execute("select * from fruit_load_list")
+       return my_cur.fetchall()
+
+if streamlit.button('Get Fruit list'):
+  my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+  my_data_rows = get_fruit_list()
+  streamlit.dataframe(my_data_rows)
 
