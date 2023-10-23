@@ -8,8 +8,6 @@ streamlit.text('1')
 streamlit.text('2')
 streamlit.text('3')
 
-snowflake-connector-python
-
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
