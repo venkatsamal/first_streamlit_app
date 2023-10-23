@@ -16,7 +16,7 @@ streamlit.write('user entered', fruit_choice)
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
-my_cur.execute("select * from fruit_load_list values")
+my_cur.execute("select * from fruit_load_list")
 my_data_row = my_cur.fetchall()
 streamlit.header("Fruit List from Snowflake:")
 streamlit.dataframe(my_data_row)
